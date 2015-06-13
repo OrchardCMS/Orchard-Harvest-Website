@@ -67,6 +67,7 @@ namespace Orchard.Setup {
             builder.RegisterType<ResourceFilter>().As<IFilterProvider>().InstancePerLifetimeScope();
             builder.RegisterType<DefaultOrchardShell>().As<IOrchardShell>().InstancePerMatchingLifetimeScope("shell");
             builder.RegisterType<SweepGenerator>().As<ISweepGenerator>().SingleInstance();
+            builder.RegisterType<SetupBackgroundService>().As<IBackgroundService>().InstancePerLifetimeScope();
 
             // setup mode specific implementations of needed service interfaces
             builder.RegisterType<SafeModeThemeService>().As<IThemeManager>().InstancePerLifetimeScope();
@@ -100,6 +101,12 @@ namespace Orchard.Setup {
             builder.RegisterModule(new ShapeAttributeBindingModule());
         }
 
+
+        internal class SetupBackgroundService : IBackgroundService {
+            public void Sweep() {
+                // Don't run any background service in setup mode.
+            }
+        }
 
         [UsedImplicitly]
         class SafeModeText : IText {
@@ -183,6 +190,11 @@ namespace Orchard.Setup {
 
             public ResourceDebugMode ResourceDebugMode {
                 get { return ResourceDebugMode.FromAppSetting; }
+                set { throw new NotImplementedException(); }
+            }
+
+            public bool UseCdn {
+                get { return false; }
                 set { throw new NotImplementedException(); }
             }
 

@@ -1,9 +1,4 @@
-Orchard Project
-ASP.NET Open Source Gallery at Outercurve Foundation
-Copyright 2009-2011 Outercurve Foundation
-
-This product includes software developed at
-The Outercurve Foundation (http://www.outercurve.org/).
+Orchard Project - Copyright .NET Foundation
 
 Orchard includes works distributed under the licenses listed below. The full text for most of the licenses listed below can be found in the LICENSE.txt file accompanying each work. The original copyright notices have been preserved within the respective files and or packages. Please refer to the specific files and/or packages for more detailed information about the authors, copyright notices, and licenses.
 
@@ -142,16 +137,28 @@ Website:      http://www.jacklmoore.com/colorbox/
 Copyright:    (c) 2013 Jack Moore - jacklmoore.com/colorbox
 License:      MIT
 
+jQuery File Upload
+-----
+Website:      https://blueimp.net
+Copyright:    Copyright 2010, Sebastian Tschan
+License       MIT
+
 jQuery UI (Core, Widget, Datepicker)
 -----
 Website:      http://docs.jquery.com/UI
 Copyright:    Copyright (c) 2010 lib/jquery.ui/AUTHORS.txt (http://jqueryui.com/about)
 License:      MIT
 
-jQuery ui.timepickr, jQuery utils
+jQuery Calendar
 -----
-Website:      http://code.google.com/p/jquery-utils/
-Copyright:    Copyright (c) Maxime Haineault (http://haineault.com)
+Website:      http://keith-wood.name/calendars.html
+Author:       Keith Wood
+License:      MIT
+
+jQuery Date/Time Entry
+-----
+Website:      http://keith-wood.name/datetimeEntry.html
+Copyright:    Keith Wood
 License:      MIT
 
 jQuery ScrollTo
@@ -201,7 +208,7 @@ MySQL Connectors
 Copyright:    Copyright (c) 2004, 2011, Oracle and/or its affiliates
 License:      GNU GENERAL PUBLIC LICENSE Version 2; Oracle’s Free and Open Source Software ("FOSS") License Exception
 
-In order to comply with Section 2(a) of the FOSS License Exception, Outercurve Foundation hereby offers any recipient of this package a machine-readable copy of the corresponding source code for Oracle's MySQL Client Libraries upon written demand.  This offer is good for three years.
+In order to comply with Section 2(a) of the FOSS License Exception, .NET Foundation hereby offers any recipient of this package a machine-readable copy of the corresponding source code for Oracle's MySQL Client Libraries upon written demand.  This offer is good for three years.
 
 NHibernate, NHibernate Linq
 -----
@@ -214,6 +221,12 @@ NHibernate Lambda Extensions
 Website:      http://code.google.com/p/nhlambdaextensions/
 Copyright:    Unknown http://code.google.com/p/nhlambdaextensions/people/list
 License:      LGPL 2.1
+
+NProgress
+-----
+Website:      http://ricostacruz.com/nprogress/
+Copyright:    Copyright (c) 2013-2014 Rico Sta. Cruz
+License:      MIT
 
 NuGet
 -----
@@ -239,6 +252,12 @@ Microsoft Xml Document Transformation 1.0.0.0
 Website:      http://www.microsoft.com
 Copyright:    Copyright Microsoft Corporation
 License:      Custom EULA - http://www.microsoft.com/web/webpi/eula/microsoft_web_xmltransform.htm
+
+StackExchange.Redis
+------
+Websites:     https://github.com/StackExchange/StackExchange.Redis
+Copyright:    Copyright (c) 2014 Stack Exchange
+License:      MIT - https://raw.githubusercontent.com/StackExchange/StackExchange.Redis/master/LICENSE
 
 SlowCheetah
 -----

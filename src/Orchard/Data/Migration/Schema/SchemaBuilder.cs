@@ -1,5 +1,6 @@
 ﻿using System;
 using Orchard.Data.Migration.Interpreters;
+using Orchard.Localization;
 
 namespace Orchard.Data.Migration.Schema {
     public class SchemaBuilder {
@@ -7,10 +8,13 @@ namespace Orchard.Data.Migration.Schema {
         private readonly string _featurePrefix;
         private readonly Func<string, string> _formatPrefix;
 
+        public Localizer T { get; set; }
+
         public SchemaBuilder(IDataMigrationInterpreter interpreter, string featurePrefix = null, Func<string, string> formatPrefix = null) {
             _interpreter = interpreter;
             _featurePrefix = featurePrefix ?? String.Empty;
             _formatPrefix = formatPrefix ?? (s => s ?? String.Empty);
+            T = NullLocalizer.Instance;
         }
 
         public IDataMigrationInterpreter Interpreter {
@@ -23,6 +27,13 @@ namespace Orchard.Data.Migration.Schema {
       
         public Func<string, string> FormatPrefix {
             get { return _formatPrefix; }
+        }
+
+        /// <summary>
+        /// Translate Table name into database table name - including prefixes
+        /// </summary>
+        public virtual string TableDbName(string srcTable) {
+            return _interpreter.PrefixTableName(String.Concat(FormatPrefix(FeaturePrefix), srcTable));
         }
       
         public SchemaBuilder CreateTable(string name, Action<CreateTableCommand> table) {
@@ -46,12 +57,16 @@ namespace Orchard.Data.Migration.Schema {
         }
 
         public SchemaBuilder ExecuteSql(string sql, Action<SqlStatementCommand> statement = null) {
-            var sqlStatmentCommand = new SqlStatementCommand(sql);
-            if ( statement != null ) {
-                statement(sqlStatmentCommand);
+            try {
+                var sqlStatmentCommand = new SqlStatementCommand(sql);
+                if (statement != null) {
+                    statement(sqlStatmentCommand);
+                }
+                Run(sqlStatmentCommand);
+                return this;
+            } catch (Exception ex) {
+                throw new OrchardException(T("An unexpected error occured while executing the SQL statement: {0}", sql), ex); // Add the sql to the nested exception information
             }
-            Run(sqlStatmentCommand);
-            return this;
         }
 
         private void Run(ISchemaBuilderCommand command) {

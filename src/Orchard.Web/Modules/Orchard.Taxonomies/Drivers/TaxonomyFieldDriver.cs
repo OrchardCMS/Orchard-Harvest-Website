@@ -83,9 +83,11 @@ namespace Orchard.Taxonomies.Drivers {
         }
 
         protected override DriverResult Editor(ContentPart part, TaxonomyField field, IUpdateModel updater, dynamic shapeHelper) {
-            var viewModel = new TaxonomyFieldViewModel { Terms =  new List<TermEntry>() };
+            // Initializing viewmodel using the terms that are already selected to prevent loosing them when updating an editor group this field isn't displayed in.
+            var viewModel = new TaxonomyFieldViewModel { Terms = field.Terms.Select(t => t.CreateTermEntry()).ToList() };
+            foreach (var item in viewModel.Terms) item.IsChecked = true;
             
-            if(updater.TryUpdateModel(viewModel, GetPrefix(field, part), null, null)) {
+            if (updater.TryUpdateModel(viewModel, GetPrefix(field, part), null, null)) {
                 var checkedTerms = viewModel.Terms
                     .Where(t => (t.IsChecked || t.Id == viewModel.SingleTermId))
                     .Select(t => GetOrCreateTerm(t, viewModel.TaxonomyId, field))
@@ -128,7 +130,14 @@ namespace Orchard.Taxonomies.Drivers {
         }
 
         private TermPart GetOrCreateTerm(TermEntry entry, int taxonomyId, TaxonomyField field) {
-            var term = entry.Id > 0 ? _taxonomyService.GetTerm(entry.Id) : default(TermPart);
+            var term = default(TermPart);
+
+            if (entry.Id > 0)            
+                term = _taxonomyService.GetTerm(entry.Id);            
+                 
+            //Prevents creation of existing term
+            if (term == null && !string.IsNullOrEmpty(entry.Name))
+                term = _taxonomyService.GetTermByName(taxonomyId, entry.Name.Trim());
 
             if (term == null) {
                 var settings = field.PartFieldDefinition.Settings.GetModel<TaxonomyFieldSettings>();
@@ -140,11 +149,9 @@ namespace Orchard.Taxonomies.Drivers {
 
                 var taxonomy = _taxonomyService.GetTaxonomy(taxonomyId);
                 term = _taxonomyService.NewTerm(taxonomy);
-                term.Container = taxonomy.ContentItem;
                 term.Name = entry.Name.Trim();
                 term.Selectable = true;
 
-                _taxonomyService.ProcessPath(term);
                 Services.ContentManager.Create(term, VersionOptions.Published);
                 Services.Notifier.Information(T("The {0} term has been created.", term.Name));
             }

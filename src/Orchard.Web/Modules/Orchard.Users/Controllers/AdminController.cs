@@ -25,7 +25,7 @@ namespace Orchard.Users.Controllers {
     public class AdminController : Controller, IUpdateModel {
         private readonly IMembershipService _membershipService;
         private readonly IUserService _userService;
-        private readonly IEnumerable<IUserEventHandler> _userEventHandlers;
+        private readonly IUserEventHandler _userEventHandlers;
         private readonly ISiteService _siteService;
 
         public AdminController(
@@ -33,7 +33,7 @@ namespace Orchard.Users.Controllers {
             IMembershipService membershipService,
             IUserService userService,
             IShapeFactory shapeFactory,
-            IEnumerable<IUserEventHandler> userEventHandlers,
+            IUserEventHandler userEventHandlers,
             ISiteService siteService) {
             Services = services;
             _membershipService = membershipService;
@@ -275,10 +275,10 @@ namespace Orchard.Users.Controllers {
 
             if (user != null) {
                 if (String.Equals(Services.WorkContext.CurrentSite.SuperUser, user.UserName, StringComparison.Ordinal)) {
-                    Services.Notifier.Error(T("The Super user can't be removed. Please disable this account or specify another Super user account"));
+                    Services.Notifier.Error(T("The Super user can't be removed. Please disable this account or specify another Super user account."));
                 }
                 else if (String.Equals(Services.WorkContext.CurrentUser.UserName, user.UserName, StringComparison.Ordinal)) {
-                    Services.Notifier.Error(T("You can't remove your own account. Please log in with another account"));
+                    Services.Notifier.Error(T("You can't remove your own account. Please log in with another account."));
                 }
                 else{
                     Services.ContentManager.Remove(user.ContentItem);
@@ -289,6 +289,7 @@ namespace Orchard.Users.Controllers {
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
         public ActionResult SendChallengeEmail(int id) {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
                 return new HttpUnauthorizedResult();
@@ -309,6 +310,7 @@ namespace Orchard.Users.Controllers {
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
         public ActionResult Approve(int id) {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
                 return new HttpUnauthorizedResult();
@@ -318,14 +320,13 @@ namespace Orchard.Users.Controllers {
             if ( user != null ) {
                 user.As<UserPart>().RegistrationStatus = UserStatus.Approved;
                 Services.Notifier.Information(T("User {0} approved", user.UserName));
-                foreach (var userEventHandler in _userEventHandlers) {
-                    userEventHandler.Approved(user);
-                }
+                _userEventHandlers.Approved(user);
             }
 
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
         public ActionResult Moderate(int id) {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
                 return new HttpUnauthorizedResult();

@@ -1,7 +1,5 @@
-﻿using System.ComponentModel;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Net.Configuration;
-using System.Net.Mail;
 using Orchard.ContentManagement;
 using System;
 using Orchard.ContentManagement.Utilities;
@@ -18,6 +16,10 @@ namespace Orchard.Email.Models {
             get { return this.Retrieve(x => x.Address); }
             set { this.Store(x => x.Address, value); }
         }
+
+        private readonly LazyField<string> _addressPlaceholder = new LazyField<string>();
+        internal LazyField<string> AddressPlaceholderField { get { return _addressPlaceholder; } }
+        public string AddressPlaceholder { get { return _addressPlaceholder.Value; } }
 
         public string Host {
             get { return this.Retrieve(x => x.Host); }

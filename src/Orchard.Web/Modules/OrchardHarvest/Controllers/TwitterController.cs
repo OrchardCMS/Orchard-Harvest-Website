@@ -25,18 +25,18 @@ namespace OrchardHarvest.Controllers {
         }
 
         private static object MapStatus(Status status) {
-            if (status == null || status.StatusID == null)
+            if (status == null || status.StatusID == 0)
                 return null;
 
             return new {
                 created_at = status.CreatedAt.ToString("F"),
                 text = status.Text,
                 id_str = status.StatusID,
-                screen_name = status.User.Identifier.ScreenName,
+                screen_name = status.User.ScreenName,
                 retweeted_status = MapStatus(status.RetweetedStatus),
                 user = new {
                     name = status.User.Name,
-                    screen_name = status.User.Identifier.ScreenName,
+                    screen_name = status.User.ScreenName,
                     profile_image_url = status.User.ProfileImageUrl,
                     profile_image_url_https = status.User.ProfileImageUrlHttps,
                 }

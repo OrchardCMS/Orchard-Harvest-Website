@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Orchard.Specs</RootNamespace>
     <AssemblyName>Orchard.Specs</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -61,8 +61,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\autofac\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\lib\castle-windsor\net45\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\castle\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -325,6 +326,15 @@
     <None Include="Enumeration.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Enumeration.feature.cs</LastGenOutput>
+    </None>
+    <WebConfigsToTransform Include="Hosting\Orchard.Web\Config\HostComponents.config">
+      <SubType>Designer</SubType>
+    </WebConfigsToTransform>
+    <None Include="Hosting\Orchard.Web\Config\HostComponents.Debug.config">
+      <DependentUpon>HostComponents.config</DependentUpon>
+    </None>
+    <None Include="Hosting\Orchard.Web\Config\HostComponents.Release.config">
+      <DependentUpon>HostComponents.config</DependentUpon>
     </None>
     <None Include="Input.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

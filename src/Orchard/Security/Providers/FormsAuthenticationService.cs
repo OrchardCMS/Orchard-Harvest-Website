@@ -5,6 +5,7 @@ using Orchard.Environment.Configuration;
 using Orchard.Logging;
 using Orchard.ContentManagement;
 using Orchard.Mvc;
+using Orchard.Mvc.Extensions;
 using Orchard.Services;
 
 namespace Orchard.Security.Providers {
@@ -102,7 +103,7 @@ namespace Orchard.Security.Providers {
                 return _signedInUser;
 
             var httpContext = _httpContextAccessor.Current();
-            if (httpContext == null || !httpContext.Request.IsAuthenticated || !(httpContext.User.Identity is FormsIdentity)) {
+            if (httpContext.IsBackgroundContext() || !httpContext.Request.IsAuthenticated || !(httpContext.User.Identity is FormsIdentity)) {
                 return null;
             }
 
@@ -112,7 +113,7 @@ namespace Orchard.Security.Providers {
             // the cookie user data is {userId};{tenant}
             var userDataSegments = userData.Split(';');
             
-            if (userDataSegments.Length != 2) {
+            if (userDataSegments.Length < 2) {
                 return null;
             }
 
@@ -125,7 +126,7 @@ namespace Orchard.Security.Providers {
 
             int userId;
             if (!int.TryParse(userDataId, out userId)) {
-                Logger.Fatal("User id not a parsable integer");
+                Logger.Error("User id not a parsable integer");
                 return null;
             }
 

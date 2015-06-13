@@ -71,7 +71,7 @@ namespace OrchardHarvest.Services {
         }
 
         public IEnumerable<Status> FetchTweetsForList(TwitterPart part) {
-            var listId = part.Parameter2.Trim();
+            var listId = (ulong)XmlHelper.Parse<long>(part.Parameter2.Trim());
             var count = part.Count;
             var context = CreateContext();
             return context.List.Where(x =>
@@ -112,7 +112,7 @@ namespace OrchardHarvest.Services {
             return context.List.Where(x =>
                 x.ScreenName == screenName)
                 .Select(x => new TwitterList {
-                    Id = x.ListID,
+                    Id = x.ListID.ToString(),
                     Name = x.Name
                 });
         }
@@ -120,13 +120,13 @@ namespace OrchardHarvest.Services {
         private TwitterContext CreateContext() {
             var settings = _services.WorkContext.CurrentSite.As<TwitterSettingsPart>();
             return new TwitterContext(new SingleUserAuthorizer {
-                Credentials = new SingleUserInMemoryCredentials {
+                CredentialStore = new SingleUserInMemoryCredentialStore() {
                     ConsumerKey = settings.ConsumerKey,
                     ConsumerSecret = settings.ConsumerSecret,
-                    TwitterAccessToken = settings.AccessToken,
-                    TwitterAccessTokenSecret = settings.AccessTokenSecret
+                    AccessToken = settings.AccessToken,
+                    AccessTokenSecret = settings.AccessTokenSecret
                 },
-                AuthAccessType = AuthAccessType.Read
+                AccessType = AuthAccessType.Read
             });
         }
     }
