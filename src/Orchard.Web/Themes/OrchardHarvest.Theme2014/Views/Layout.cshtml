@@ -1,0 +1,13 @@
+﻿@Display.LayoutHead()
+<body data-base-path="@Url.Content("~/themes/orchardharvest.theme2014")">
+    <!-- layout-->
+    <div id="layout">
+        @*@Display.LoginBar()*@
+        @*@Display.InfoHeadBar()*@
+        @Display.Header()
+        @Display(Model.Content)
+        @Display(Model.Footer)
+        @Display.Footer()
+    </div>
+    <!-- End layout-->
+</body>

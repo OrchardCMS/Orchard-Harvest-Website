@@ -1,0 +1,33 @@
+﻿@{
+    var title = (string)Model.ContentItem.TitlePart.Title;
+    Layout.Title = title;
+
+    var isHomePage = Request.Path == Url.Content("~/");
+}
+@if (!isHomePage) {
+    <section class="padding content-item page">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Title Heading -->
+                    <div class="titles-heading">
+                        <div class="line"></div>
+                        <h1>
+                            @title
+                            <span>
+                                <i class="fa fa-star"></i>
+                                Orchard Harvest 2014
+                                <i class="fa fa-star"></i>
+                            </span>
+                        </h1>
+                    </div>
+                    <!-- End Title Heading --> 
+
+                    <div class="content-holder">
+                        @Display(Model.Content)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

@@ -1,0 +1,80 @@
+﻿@using Onestop.Social.Extensions
+@using OrchardHarvest.Models
+@{Style.Include("twitter.css");}
+@{
+    var part = (TwitterPart)Model.Part;
+    var tweets = (IEnumerable<Tweet>)Model.Tweets;
+}
+<ul class="tweet-list">
+    @foreach (var tweet in tweets) {
+        <text>
+        <li>
+            @if (part.DisplayProfilePhoto) { 
+                <img src="@tweet.ProfilePhotoUrl" class="tweet-avatar" height="24" width="24" alt="@tweet.Name" />
+            }
+            @if (part.DisplayName) {
+                if (part.DisplayNameAsLink) {
+                <span class="tweet-name"><a href="http://www.twitter.com/@tweet.ScreenName" title="Follow @tweet.ScreenName on twitter" rel="external">@tweet.Name</a></span>
+                }
+                else {           
+                <span class="tweet-name">@tweet.Name</span>
+                }
+            }
+            @if (part.DisplayScreenName) {
+                if (part.DisplayScreenNameAsLink) {
+                <span class="tweet-screen-name"><a href="http://www.twitter.com/@tweet.ScreenName" title="Follow @tweet.ScreenName on twitter" rel="external">@T("@")@tweet.ScreenName</a></span>                                    
+                }
+                else {           
+                <span class="tweet-screen-name">@T("@")@tweet.ScreenName</span>                                    
+                }
+            }
+            @if (part.DisplayName || part.DisplayScreenName) {<br />}
+            @foreach (string substring in tweet.Message.Split(' ')) {
+                if (substring == string.Empty) {
+                    continue;
+                }
+                if (part.DisplayMentionAsLink && substring.StartsWith("@")) {
+                    string username = substring.Replace("@", string.Empty);
+                <a href="http://www.twitter.com/@username" title="Follow @username on twitter" rel="external">@substring</a>
+                }
+                else if (substring.StartsWith("#")) {
+                    if (!part.DisplayHashTags) {
+                        continue;
+                    }
+                    if (part.DisplayHashTagAsLink) {
+                        string hashTag = substring.Replace("#", string.Empty);
+                        string searchUrl = "http://twitter.com/#!/search?q=%23" + hashTag;
+                <a href="@searchUrl" title="Search for mentions of @substring on twitter" rel="external">@substring</a>
+                    }
+                    else {
+                @substring @T(" ")
+                    }
+                }
+                else if (substring.StartsWith("http://")) {
+                    if (part.DisplayUrlAsLink) {
+                <a href="@substring" title="Open link" rel="external">@substring</a>
+                    }
+                    else {
+                @substring @T(" ")
+                    }
+                }
+                else {
+                @substring @T(" ")
+                }
+            }
+
+            @if (part.DisplayTimestamp) { 
+                <br />
+                <span class="tweet-timestamp">
+                    @if (part.DisplayTimestampAsLink) {
+                        <a href="http://twitter.com/@tweet.ScreenName/statuses/@tweet.Id">@Display.DateTimeRelative(tweet.CreatedAt)</a> @T("...")
+                    }
+                    else {
+                        @Display.DateTimeRelative(tweet.CreatedAt) @T("...")
+                    }
+                </span>
+            }
+        </li>
+        </text>
+    }
+</ul>

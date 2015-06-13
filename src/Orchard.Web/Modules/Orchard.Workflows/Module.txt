@@ -1,0 +1,15 @@
+﻿Name: Workflows
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.8
+OrchardVersion: 1.8
+Category: Content
+Description: Provides tools to create custom workflows.
+Features:
+    Orchard.Workflows:
+        Description: Provides tools to create custom workflows.
+        Dependencies: Orchard.Tokens, Orchard.Forms, Orchard.jQuery
+    Orchard.Workflows.Timer:
+        Description: Provides a Timer activity.
+        Dependencies: Orchard.Workflows

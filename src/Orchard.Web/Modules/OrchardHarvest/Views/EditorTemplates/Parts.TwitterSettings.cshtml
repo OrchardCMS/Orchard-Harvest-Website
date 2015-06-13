@@ -1,0 +1,27 @@
+﻿@model OrchardHarvest.Models.TwitterSettingsPart
+<fieldset>
+    <legend>@T("Twitter API Settings")</legend>
+    <ol>
+        <li>
+            @Html.LabelFor(m => m.ConsumerKey, T("Consumer Key"))
+            @Html.TextBoxFor(m => m.ConsumerKey, new { @class = "text large" })
+            <span class="hint">@T("Your Consumer Key to be used when making Twitter API calls.")</span>
+        </li>
+        <li>
+            @Html.LabelFor(m => m.ConsumerSecret, T("Consumer Secret"))
+            @Html.TextBoxFor(m => m.ConsumerSecret, new { @class = "text large" })
+            <span class="hint">@T("Your Consumer Secret to be used when making Twitter API calls.")</span>
+        </li>
+        <li>
+            @Html.LabelFor(m => m.AccessToken, T("Access Token"))
+            @Html.TextBoxFor(m => m.AccessToken, new { @class = "text large" })
+            <span class="hint">@T("Your Access Token to be used when making Twitter API calls.")</span>
+        </li>
+        <li>
+            @Html.LabelFor(m => m.AccessTokenSecret, T("Access Token Secret"))
+            @Html.TextBoxFor(m => m.AccessTokenSecret, new { @class = "text large" })
+            <span class="hint">@T("Your Access Token Secret to be used when making Twitter API calls.")</span>
+        </li>
+    </ol>
+    @T("See:") <a href="https://dev.twitter.com" target="_blank">https://dev.twitter.com</a>
+</fieldset>

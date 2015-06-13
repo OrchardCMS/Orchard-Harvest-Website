@@ -1,0 +1,153 @@
+﻿@using Orchard.ContentManagement
+@using Orchard.Fields.Fields
+@using Orchard.MediaLibrary.Fields
+@using Orchard.Utility.Extensions
+@using OrchardHarvest.Helpers
+@using OrchardHarvest.Models
+@{
+    var sessions = ((IEnumerable<ContentItem>)Model.ContentItems).ToArray();
+    var days = sessions.GroupBy(x => x.As<SessionPart>().Field<DateTimeField>("Start").DateTime.Date).OrderBy(x => x.Key).ToArray();
+}
+@*<!-- Services -->
+    <section class="paddings services" id="sessions">
+        <div class="container">
+
+            <i class="fa fa-cogs icon-section right"></i>
+
+            <!-- Title Heading -->
+            <div class="titles-heading">
+                <div class="line"></div>
+                <h1>
+                    @T("Sessions")
+                    <span>
+                        <i class="fa fa-star"></i>
+                        @T("Day {0}", currentDay)
+                        <i class="fa fa-star"></i>
+                    </span>
+                </h1>
+            </div>
+            <!-- End Title Heading -->
+            @for (var row = 0; row <= rows; row++) {
+                <!-- Row fuid-->
+                <div class="row padding-top">
+                    @for (var col = 0; col < 3; col++) {
+                        var index = (row * 3) + col;
+
+                        if (index < sessions.Length) {
+                            var session = sessions[index];
+                            var sessionPart = session.As<SessionPart>();
+                            var bodyPart = session.As<BodyPart>();
+                            var iconField = sessionPart.Fields.FirstOrDefault(x => x.Name == "IconCssClass") as TextField;
+                            var iconCss = iconField != null ? !String.IsNullOrWhiteSpace(iconField.Value) ? iconField.Value : "fa-star" : "fa-star";
+                            var speakers = sessionPart.Speakers;
+                            var speakerIndex = 0;
+                            <!-- Item service-->
+                            <div class="col-md-4">
+                                <div class="item-service border-right">
+                                    <div class="row head-service">
+                                        <div class="col-md-2">
+                                            <i class="fa @iconCss"></i>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <h4>@Html.ItemDisplayLink(session)</h4>
+                                            <h5>
+                                                @foreach (var speaker in speakers) {
+                                                    @Html.ItemDisplayLink(speaker)
+                                                    if (speakerIndex++ < speakers.Count()-1) {
+                                                        <span>@T(", ")</span>
+                                                    }
+                                                }
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <p>@bodyPart.Text.RemoveTags().Ellipsize(125, "...", true)</p>
+                                </div>
+                            </div>
+                            <!-- End Item service-->
+                        }
+                    }
+                </div>
+                <!-- End Row fuid-->
+            }
+            <section>
+                <ul class="list-unstyled horizontal">
+                    @{
+                        var dayNumber = 0;
+                    }
+                    @foreach (var day in days) {
+                        var current = selectedDate != null && day.Date == selectedDate.Value.Date;
+                        <li><a href="@String.Format("{0}?date={1}", currentPath, day.ToString("yyy-MM-dd"))" @if (current) { <text> class="strong" </text>  }>@T("Day {0}", ++dayNumber)</a></li>
+                    }
+                </ul>
+            </section>
+        </div>
+        <!-- End Container-->
+    </section>
+    <!-- End Services-->*@
+
+<!-- Works -->
+<section class="paddings">
+    <div class="container">
+
+        <!-- Nav Filters -->
+        <div class="portfolioFilter">
+            <a href="#" data-filter="*" class="current">Show All</a>
+            @{
+                var dayNumber = 0;
+            }
+            @foreach (var day in days) {
+                var dayText = T("Day {0}", ++dayNumber);
+                var dayId = dayText.Text.HtmlClassify();
+                <a href="#@dayId" data-filter=".@dayId">@dayText</a>
+            }
+        </div>
+        <!-- End Nav Filters -->
+        <!-- Items Works filters-->
+        <div class="works portfolioContainer">
+            @{
+                dayNumber = 1;
+            }
+            @foreach (var day in days) {
+                foreach (var session in day) {
+                    var sessionPart = ((dynamic)session).SessionPart;
+                    var title = Html.ItemDisplayText(session).ToString();
+                    var url = Url.ItemDisplayUrl(session);
+                    var start = (DateTime)sessionPart.Start.DateTime;
+                    var end = (DateTime)sessionPart.End.DateTime;
+                    var dayText = T("Day {0}", dayNumber);
+                    var dayId = dayText.Text.HtmlClassify();
+                    var iconClass = !String.IsNullOrWhiteSpace(sessionPart.IconCssClass.Value) ? sessionPart.IconCssClass.Value : "fa-star";
+                    var speakers = session.As<SessionPart>().Speakers;
+                    <!-- Item Work-->
+                    <div class="col-md-3 @dayId">
+                        <div class="item-work">
+                            <div class="hover">
+                                @*<img src="img/works/1.jpg" alt="" />*@
+                                <div class="session-icon"><i class="fa @iconClass"></i></div>
+                                <a href="@url" title="@title"><div class="overlay"></div></a>
+                            </div>
+                            <div class="info-work">
+                                <h4><a href="@url">@Html.Raw(title)</a></h4>
+                                <p>@String.Format("{0} to {1}", start.ToString("dddd - MMMM d - hh.mm"), end.ToString("hh:mm"))</p>
+                                <div class="icons-work">
+                                    @foreach (dynamic speaker in speakers) {
+                                        var photoField = (MediaLibraryPickerField)speaker.Photo;
+                                        var mediaPart = photoField.MediaParts.FirstOrDefault();
+                                        var photoUrl = mediaPart != null ? mediaPart.MediaUrl : default(string);
+                                        var speakerName = speaker.ContentItem.TitlePart.Title;
+                                        <a href="@Url.ItemDisplayUrl((IContent)speaker)" data-toggle="tooltip" title data-original-title="@speakerName"><img class="img-thumbnail" src="@photoUrl" alt="@speakerName"></a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Item Work-->
+                }
+                dayNumber++;
+            }
+        </div>
+        <!-- End Items Works filters-->
+    </div>
+    <!-- End Container-->
+</section>
+<!-- End Works-->

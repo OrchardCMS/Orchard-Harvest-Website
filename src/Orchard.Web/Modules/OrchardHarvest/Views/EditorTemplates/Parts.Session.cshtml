@@ -1,0 +1,30 @@
+﻿@using OrchardHarvest.ViewModels
+@model EditSessionViewModel
+@{
+    var selectedSpeakers = Model.SelectedSpeakers ?? Enumerable.Empty<SpeakerViewModel>();
+    var selectedSessionIds = selectedSpeakers.Select(x => x.Id).ToArray();
+}
+<fieldset>
+    <div>
+        <label>@T("Speakers")</label>
+        @if (Model.AllSpeakers.Any()) {
+            <ul>
+                @{ var i = 0; }
+                @foreach (var speaker in Model.AllSpeakers) {
+                    var sessionName = Html.ItemDisplayText(speaker);
+                    <li>
+                        <label>
+                            <input type="checkbox" value="@speaker.Id" name="SessionPart.SelectedSpeakers[@i].Id" @if (selectedSessionIds.Contains(speaker.Id)) { <text> checked="checked" </text>  } />
+                            @sessionName
+                            <input type="hidden" value="@sessionName" name="SessionPart.SelectedSpeakers[@i].Name" />
+                        </label>
+                    </li>
+                    i++;
+                }
+            </ul>
+        }
+        else {
+            @T("There are no speakers available yet.")
+        }
+    </div>
+</fieldset>

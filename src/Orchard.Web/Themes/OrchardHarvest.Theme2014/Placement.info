@@ -1,0 +1,9 @@
+<Placement>
+    <Place Parts_Title="-"
+           Parts_Common_Metadata="-" />
+
+    <Match ContentType="Session">
+        <Place Fields_DateTime="-"
+               Fields_Common_Text="-"/>
+    </Match>
+</Placement>

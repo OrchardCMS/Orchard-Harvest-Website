@@ -1,0 +1,180 @@
+﻿<?xml version="1.0"?>
+<Orchard>
+    <Recipe>
+        <Name>Orchard Harvest 2014</Name>
+        <Description>The recipe for the Orchard Harvest 2014 site.</Description>
+        <Author>The Orchard Team</Author>
+        <WebSite>http://2014.orchardharvest.org</WebSite>
+        <Tags></Tags>
+        <Version>1.0</Version>
+    </Recipe>
+
+    <Feature enable="Orchard.Blogs,Orchard.Comments,Orchard.Tags,Orchard.Alias,Orchard.Autoroute,
+                   TinyMce,Orchard.MediaLibrary,Orchard.ContentPicker,Orchard.PublishLater,
+                   Orchard.jQuery,Orchard.Widgets,Orchard.ContentTypes,
+                   Orchard.Scripting,Orchard.Scripting.Lightweight,PackagingServices,Orchard.Packaging,
+                   Orchard.Projections,Orchard.Fields,Orchard.OutputCache,Orchard.Taxonomies,Orchard.Workflows,
+                   Orchard.ImportExport, Orchard.CustomForms, Orchard.JobsQueue.UI, Orchard.Email,
+                   OrchardHarvest, OrchardHarvest.Theme2014" />
+
+    <Metadata>
+        <Types>
+            <Page ContentTypeSettings.Draftable="True" TypeIndexing.Indexes="Search">
+                <TagsPart />
+                <LocalizationPart />
+                <TitlePart/>
+                <AutoroutePart />
+                <MenuPart />
+            </Page>
+            <ShapeWidget ContentTypeSettings.Creatable="False" ContentTypeSettings.Draftable="False" Stereotype="Widget" DisplayName="Shape Widget">
+                <CommonPart DateEditorSettings.ShowDateEditor="False" OwnerEditorSettings.ShowOwnerEditor="False" />
+                <WidgetPart />
+                <ShapeWidget />
+            </ShapeWidget>
+            <SpeakerSubmission ContentTypeSettings.Creatable="False" ContentTypeSettings.Draftable="False" DisplayName="Speaker Submission">
+                <CommonPart DateEditorSettings.ShowDateEditor="False" OwnerEditorSettings.ShowOwnerEditor="False" />
+                <SpeakerSubmission />
+            </SpeakerSubmission>
+            <Session ContentTypeSettings.Creatable="True" ContentTypeSettings.Draftable="True" DisplayName="Session">
+                <CommonPart DateEditorSettings.ShowDateEditor="False" OwnerEditorSettings.ShowOwnerEditor="True" />
+                <TitlePart />
+                <AutoroutePart AutorouteSettings.AllowCustomPattern="True" AutorouteSettings.AutomaticAdjustmentOnEdit="False" AutorouteSettings.PatternDefinitions="[{&quot;Name&quot;:&quot;Title&quot;,&quot;Pattern&quot;:&quot;{Content.Slug}&quot;,&quot;Description&quot;:&quot;my-session&quot;}]" AutorouteSettings.DefaultPatternIndex="0" AutorouteSettings.PerItemConfiguration="False" />
+                <BodyPart BodyTypePartSettings.Flavor="html" />
+                <SessionPart />
+            </Session>
+        </Types>
+        <Parts>
+            <BodyPart BodyPartSettings.FlavorDefault="html" />
+            <ShapeWidget ContentPartSettings.Attachable="True">
+                <ShapeName.TextField DisplayName="ShapeName" TextFieldSettings.Flavor="Wide" TextFieldSettings.Hint="Specify the name of the shape to display." TextFieldSettings.Required="True" />
+            </ShapeWidget>
+            <SpeakerSubmission ContentPartSettings.Attachable="True">
+                <Name.TextField DisplayName="Name" TextFieldSettings.Flavor="Wide" TextFieldSettings.Required="True" />
+                <Email.TextField DisplayName="Email" TextFieldSettings.Flavor="Wide" TextFieldSettings.Required="True" />
+                <Topics.TextField DisplayName="Topics" TextFieldSettings.Flavor="Textarea" TextFieldSettings.Required="True" />
+            </SpeakerSubmission>
+            <SessionPart ContentPartSettings.Description="Turns your type into an Orchard Harvest Session" ContentPartSettings.Attachable="True">
+                <Date.DateTimeField DisplayName="Date" DateTimeFieldSettings.Display="DateOnly" DateTimeFieldSettings.Required="True" />
+                <IconCssClass.TextField DisplayName="Icon Css Class" TextFieldSettings.Flavor="Wide" TextFieldSettings.Hint="Enter the CSS class name of the Font Awesome class to display as an icon for this Session." TextFieldSettings.Required="False" />
+            </SessionPart>
+        </Parts>
+    </Metadata>
+    <Data>
+        <Layer Id="/Layer.LayerName=Default" Status="Published">
+            <CommonPart Owner="/User.UserName=admin" CreatedUtc="2014-03-28T19:30:42.905109Z" PublishedUtc="2014-03-28T19:30:43.1201478Z" ModifiedUtc="2014-03-28T19:30:42.905109Z" />
+            <LayerPart Name="Default" Description="The widgets in this layer are displayed on all pages" LayerRule="true" />
+        </Layer>
+        <Layer Id="/Layer.LayerName=Authenticated" Status="Published">
+            <CommonPart Owner="/User.UserName=admin" CreatedUtc="2014-03-28T19:30:43.3121297Z" PublishedUtc="2014-03-28T19:30:43.3431318Z" ModifiedUtc="2014-03-28T19:30:43.3121297Z" />
+            <LayerPart Name="Authenticated" Description="The widgets in this layer are displayed when the user is authenticated" LayerRule="authenticated" />
+        </Layer>
+        <Layer Id="/Layer.LayerName=Anonymous" Status="Published">
+            <CommonPart Owner="/User.UserName=admin" CreatedUtc="2014-03-28T19:30:43.4261361Z" PublishedUtc="2014-03-28T19:30:43.4611374Z" ModifiedUtc="2014-03-28T19:30:43.4261361Z" />
+            <LayerPart Name="Anonymous" Description="The widgets in this layer are displayed when the user is anonymous" LayerRule="not authenticated" />
+        </Layer>
+        <Layer Id="/Layer.LayerName=Disabled" Status="Published">
+            <CommonPart Owner="/User.UserName=admin" CreatedUtc="2014-03-28T19:30:43.5271413Z" PublishedUtc="2014-03-28T19:30:43.5531444Z" ModifiedUtc="2014-03-28T19:30:43.5271413Z" />
+            <LayerPart Name="Disabled" Description="The widgets in this layer are never displayed" LayerRule="false" />
+        </Layer>
+        <Layer Id="/Layer.LayerName=TheHomepage" Status="Published">
+            <CommonPart Owner="/User.UserName=admin" CreatedUtc="2014-03-28T19:30:43.6241469Z" PublishedUtc="2014-03-28T19:30:43.6651496Z" ModifiedUtc="2014-03-28T19:30:43.6241469Z" />
+            <LayerPart Name="TheHomepage" Description="The widgets in this layer are displayed on the home page" LayerRule="url '~/'" />
+        </Layer>
+        <Menu Id="/Identifier=a61f37591cd144e486cb91c093b913d1" Status="Published">
+            <IdentityPart Identifier="a61f37591cd144e486cb91c093b913d1" />
+            <CommonPart CreatedUtc="2014-03-28T19:30:44.2993166Z" PublishedUtc="2014-03-28T19:30:44.3506767Z" ModifiedUtc="2014-03-28T19:30:44.2993166Z" />
+            <TitlePart Title="Main Menu" />
+        </Menu>
+        <MenuItem Id="/Identifier=c96d27026aea432e8f56480d442d3c4d" Status="Published">
+            <IdentityPart Identifier="c96d27026aea432e8f56480d442d3c4d" />
+            <CommonPart Owner="/User.UserName=admin" CreatedUtc="2014-03-28T19:30:45.1101711Z" PublishedUtc="2014-03-28T19:30:45.1711781Z" ModifiedUtc="2014-03-28T19:30:45.1101711Z" />
+            <MenuItemPart Url="~/" />
+            <MenuPart Menu="/Identifier=a61f37591cd144e486cb91c093b913d1" MenuText="Home" MenuPosition="0" />
+        </MenuItem>
+        <MenuWidget Id="/Identifier=MenuWidget1" Status="Published">
+            <IdentityPart Identifier="MenuWidget1" />
+            <CommonPart Owner="/User.UserName=admin" Container="/Layer.LayerName=Default" CreatedUtc="2014-03-28T19:30:45.3011792Z" PublishedUtc="2014-03-28T19:30:45.3668823Z" ModifiedUtc="2014-03-28T19:30:45.3011792Z" />
+            <WidgetPart Title="Main Menu" Position="1" Zone="Navigation" RenderTitle="false" Name="" />
+            <MenuWidgetPart Menu="/Identifier=a61f37591cd144e486cb91c093b913d1" StartLevel="1" Levels="0" Breadcrumb="false" AddCurrentPage="false" AddHomePage="false" ShowFullMenu="false" />
+        </MenuWidget>
+        <Page Id="/alias=" Status="Published">
+            <BodyPart Text="" />
+            <CommonPart Owner="/User.UserName=admin" CreatedUtc="2014-03-28T19:30:00Z" PublishedUtc="2014-03-29T01:28:05.7960479Z" ModifiedUtc="2014-03-29T01:28:05.3540005Z" />
+            <AutoroutePart Alias="/" CustomPattern="/" UseCustomPattern="true" />
+            <TitlePart Title="Orchard Harvest 2014" />
+            <TagsPart Tags="" />
+        </Page>
+        <ShapeWidget Id="" Status="Published">
+            <TextField.ShapeName Text="Home__Jumbotron" />
+            <CommonPart Owner="/User.UserName=admin" Container="/Layer.LayerName=TheHomepage" CreatedUtc="2014-03-29T01:35:18.6359982Z" PublishedUtc="2014-03-29T01:35:18.7319775Z" ModifiedUtc="2014-03-29T01:35:18.7969819Z" />
+            <WidgetPart Title="Jumbotron" Position="2" Zone="Content" RenderTitle="false" Name="" />
+        </ShapeWidget>
+        <ShapeWidget Id="" Status="Published">
+            <TextField.ShapeName Text="Home__RegistrationBox" />
+            <CommonPart Owner="/User.UserName=admin" Container="/Layer.LayerName=TheHomepage" CreatedUtc="2014-03-29T01:51:39.2701724Z" PublishedUtc="2014-03-29T01:51:39.6046805Z" ModifiedUtc="2014-03-29T01:53:39.2649275Z" />
+            <WidgetPart Title="Registration CTA" Position="3" Zone="Content" RenderTitle="false" Name="" />
+        </ShapeWidget>
+        <ShapeWidget Id="" Status="Published">
+            <TextField.ShapeName Text="Home__Sessions" />
+            <CommonPart Owner="/User.UserName=admin" Container="/Layer.LayerName=Disabled" CreatedUtc="2014-03-29T01:53:27.0567891Z" PublishedUtc="2014-03-29T01:53:27.4088076Z" ModifiedUtc="2014-03-29T02:37:26.9302462Z" />
+            <WidgetPart Title="Sessions" Position="4" Zone="Content" RenderTitle="false" Name="" />
+        </ShapeWidget>
+        <ShapeWidget Id="" Status="Published">
+            <TextField.ShapeName Text="Home__Speakers" />
+            <CommonPart Owner="/User.UserName=admin" Container="/Layer.LayerName=Disabled" CreatedUtc="2014-03-29T01:55:12.2502265Z" PublishedUtc="2014-03-29T01:55:12.6142254Z" ModifiedUtc="2014-03-29T02:37:33.5770495Z" />
+            <WidgetPart Title="Speakers" Position="5" Zone="Content" RenderTitle="false" Name="" />
+        </ShapeWidget>
+        <ShapeWidget Id="" Status="Published">
+            <TextField.ShapeName Text="Home__Sponsors" />
+            <CommonPart Owner="/User.UserName=admin" Container="/Layer.LayerName=Disabled" CreatedUtc="2014-03-29T01:57:13.4012195Z" PublishedUtc="2014-03-29T01:57:13.7632724Z" ModifiedUtc="2014-03-29T02:37:48.0374169Z" />
+            <WidgetPart Title="Sponsors" Position="6" Zone="Content" RenderTitle="false" Name="" />
+        </ShapeWidget>
+        <ShapeWidget Id="" Status="Published">
+            <TextField.ShapeName Text="Home__Agenda" />
+            <CommonPart Owner="/User.UserName=admin" Container="/Layer.LayerName=Disabled" CreatedUtc="2014-03-29T01:58:34.7212783Z" PublishedUtc="2014-03-29T01:58:35.1022932Z" ModifiedUtc="2014-03-29T02:37:53.0913342Z" />
+            <WidgetPart Title="Agenda" Position="7" Zone="Content" RenderTitle="false" Name="" />
+        </ShapeWidget>
+        <ShapeWidget Id="" Status="Published">
+            <TextField.ShapeName Text="Home__Important" />
+            <CommonPart Owner="/User.UserName=admin" Container="/Layer.LayerName=Default" CreatedUtc="2014-03-29T02:00:45.40658Z" PublishedUtc="2014-03-29T02:00:45.7986347Z" ModifiedUtc="2014-03-29T02:00:45.9786464Z" />
+            <WidgetPart Title="Important" Position="1" Zone="Footer" RenderTitle="false" Name="" />
+        </ShapeWidget>
+        <ShapeWidget Id="" Status="Published">
+            <TextField.ShapeName Text="Home__Contact" />
+            <CommonPart Owner="/User.UserName=admin" Container="/Layer.LayerName=Disabled" CreatedUtc="2014-03-29T02:03:38.3704328Z" PublishedUtc="2014-03-29T02:03:38.7334469Z" ModifiedUtc="2014-03-29T02:38:29.0818023Z" />
+            <WidgetPart Title="Contact" Position="2" Zone="Footer" RenderTitle="false" Name="" />
+        </ShapeWidget>
+        <ShapeWidget Id="" Status="Published">
+            <TextField.ShapeName Text="Home__Speakers__Submission" />
+            <CommonPart Owner="/User.UserName=admin" Container="/Layer.LayerName=TheHomepage" CreatedUtc="2014-03-29T02:41:41.8294694Z" PublishedUtc="2014-03-29T02:41:42.171488Z" ModifiedUtc="2014-03-29T02:41:52.7340814Z" />
+            <WidgetPart Title="Speakers Submission" Position="8" Zone="Content" RenderTitle="false" Name="" />
+        </ShapeWidget>
+        <Page Id="/alias=speaker-submission\/confirmation" Status="Published">
+            <BodyPart Text="&lt;p&gt;Thanks for submitting. We will review your submission and get back to you shortly.&lt;/p&gt;&#xD;&#xA;&lt;p&gt;See you soon!&lt;/p&gt;" />
+            <CommonPart Owner="/User.UserName=admin" CreatedUtc="2014-03-29T13:33:00Z" PublishedUtc="2014-03-29T13:59:33.5251818Z" ModifiedUtc="2014-03-29T13:59:33.4588289Z" />
+            <AutoroutePart Alias="speaker-submission/confirmation" UseCustomPattern="false" />
+            <TitlePart Title="Speaker Submission Received" />
+            <TagsPart Tags="" />
+        </Page>
+        <CustomFormWidget Id="/Identifier=1f0c6976d12e4b918713d77a8e28acd5" Status="Published">
+            <IdentityPart Identifier="1f0c6976d12e4b918713d77a8e28acd5" />
+            <CommonPart Owner="/User.UserName=admin" Container="/Layer.LayerName=TheHomepage" CreatedUtc="2014-03-29T13:00:57.1668514Z" PublishedUtc="2014-03-29T13:00:57.5598944Z" ModifiedUtc="2014-03-29T13:01:27.2273301Z" />
+            <WidgetPart Title="Speaker Submission" Position="9" Zone="Content" RenderTitle="false" Name="SpeakerSubmission" />
+            <CustomFormPart ContentType="SpeakerSubmission" SaveContentItem="true" CustomMessage="false" Redirect="true" RedirectUrl="~/speaker-submission/confirmation" />
+        </CustomFormWidget>
+
+    </Data>
+
+    <Settings>
+        <SiteSettingsPart PageTitleSeparator=" - " SiteName="Orchard Harvest 2014" SiteSalt="1d742376071041eb9fed6eb2a31669d8" SuperUser="admin" SiteCulture="en-US" PageSize="10" MaxPageSize="0" SiteTimeZone="W. Europe Standard Time" BaseUrl="http://2014.local.orchardharvest.org" />
+        <CacheSettingsPart DefaultCacheDuration="300" DefaultMaxAge="0" ApplyCulture="false" DebugMode="false" />
+        <ThemeSiteSettingsPart CurrentThemeName="OrchardHarvest.Theme2014" />
+        <CommentSettingsPart ModerateComments="false" ClosedCommentsDelay="0" />
+        <RegistrationSettingsPart UsersCanRegister="false" UsersMustValidateEmail="false" UsersAreModerated="false" NotifyModeration="false" EnableLostPassword="false" />
+    </Settings>
+
+    <Command>
+        site setting set baseurl
+        theme activate "Orchard Harvest 2014"
+    </Command>
+</Orchard>

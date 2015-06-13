@@ -1,0 +1,6 @@
+Name: Orchard Harvest 2014
+Author: The Orchard Team
+Website: http://www.orchardharvest.org
+Description: Orchard Harvest 2014
+Version: 1.0
+Zones: Content, Footer

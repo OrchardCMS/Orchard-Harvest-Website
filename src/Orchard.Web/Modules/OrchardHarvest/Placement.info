@@ -1,0 +1,9 @@
+﻿<Placement>
+  <!-- TWITTER -->
+  <Place Parts_TwitterSettings_Edit="Content:5"
+         Parts_Twitter_Edit="Content:3"
+         Parts_Twitter="Content:1"/>
+
+    <Place Parts_Speaker_Edit="Content:5"
+           Parts_Session_Edit="Content:5"/>
+</Placement>

@@ -1,0 +1,31 @@
+﻿<div class="row">
+    <div class="form-group">
+        <div class="col-md-6">
+            <label>Your name *</label>
+            <input type="text" required="required" value="" maxlength="100" class="form-control" name="Title.Title" id="name">
+        </div>
+        <div class="col-md-6">
+            <label>Your email *</label>
+            <input type="email" required="required" value="" maxlength="100" class="form-control" name="SpeakerSubmission.Email.Value" id="email">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group">
+        <div class="col-md-12">
+            <label>Session Subject *</label>
+            <input type="text" required="required" value="" maxlength="100" class="form-control" name="SpeakerSubmission.Subject.Value" id="name">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group">
+        <div class="col-md-12">
+            <label>Session Outline *</label>
+            <textarea maxlength="5000" rows="10" class="form-control" name="SpeakerSubmission.Topics.Text" style="height: 138px;" required="required"></textarea>
+        </div>
+    </div>
+</div>
+@if (!String.IsNullOrWhiteSpace(Request.QueryString["returnUrl"])) {
+    @Html.Hidden("returnUrl", Request.QueryString["returnUrl"])
+}

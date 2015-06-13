@@ -1,0 +1,89 @@
+﻿@model OrchardHarvest.Models.TwitterPart
+<br />
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Settings</a></li>
+        <li><a href="#tabs-2">Preferences</a></li>
+        <li><a href="#tabs-3">Appearance</a></li>
+    </ul>
+    <div id="tabs-1">
+        <fieldset>
+            <div class="editor-label">
+                @T("Feed Type"):
+            </div>
+            <div class="editor-field">
+                <select id="FeedType" name="FeedType">
+                    @Html.SelectOption(Model.FeedType, (int)FeedType.Profile, "Profile")
+                    @Html.SelectOption(Model.FeedType, (int)FeedType.List, "List")
+                    @Html.SelectOption(Model.FeedType, (int)FeedType.Favorites, "Favorites")
+                    @Html.SelectOption(Model.FeedType, (int)FeedType.Search, "Search")
+                </select>
+            </div>
+            <br />
+            <div class="editor-label">
+                <span id="parameterName">Username or Search Term</span>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("Parameter1", Model.Parameter1, new { @class = "textMedium" })
+                @Html.ValidationMessage("Parameter1")
+            </div>
+            <br />
+            <div id="ListArea" style="display: none">
+                <div class="editor-label">
+                    @T("List"):
+                </div>
+                <div class="editor-field">
+                    <select id="Parameter2" name="Parameter2">
+                    </select>
+                    <a id="FindLists" class="button">Find Lists</a>
+                    @Html.Hidden("ListId", Model.Parameter2)
+                </div>
+                <br />
+            </div>
+        </fieldset>
+    </div>
+    <div id="tabs-2">
+        <fieldset>
+            <div class="editor-label">
+                @T("Count")
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("Count", Model.Count)
+                @Html.ValidationMessage("Count")
+            </div>
+            <br />
+            <div class="editor-label">
+                @T("Cache ( Minutes )")
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("CacheMinutes", Model.CacheMinutes)
+                @Html.ValidationMessage("CacheMinutes")
+            </div>
+            <br />
+        </fieldset>
+    </div>
+    <div id="tabs-3">
+        <fieldset>
+            <legend>Twitter Fields to Display</legend>
+            <div class="editor-field">
+                @Html.CheckBox("DisplayProfilePhoto", Model.DisplayProfilePhoto) @T("Profile Photo")
+                @Html.CheckBox("DisplayName", Model.DisplayName) @T("Name")
+                @Html.CheckBox("DisplayScreenName", Model.DisplayScreenName) @T("Screen Name")
+                @Html.CheckBox("DisplayHashTags", Model.DisplayHashTags) @T("Hashtags")
+                @Html.CheckBox("DisplayTimestamp", Model.DisplayTimestamp) @T("Timestamp")
+            </div>
+            <br />
+        </fieldset>
+        <fieldset>
+            <legend>Twitter Fields to Display as Links</legend>
+            <div class="editor-field">
+                @Html.CheckBox("DisplayNameAsLink", Model.DisplayNameAsLink) @T("Name")
+                @Html.CheckBox("DisplayScreenNameAsLink", Model.DisplayScreenNameAsLink) @T("Screen Name")
+                @Html.CheckBox("DisplayTimestampAsLink", Model.DisplayTimestampAsLink) @T("Timestamp")
+                @Html.CheckBox("DisplayMentionAsLink", Model.DisplayMentionAsLink) @T("Mentions")
+                @Html.CheckBox("DisplayHashTagAsLink", Model.DisplayHashTagAsLink) @T("Hash Tags")
+                @Html.CheckBox("DisplayUrlAsLink", Model.DisplayUrlAsLink) @T("Urls")
+            </div>
+        </fieldset>
+    </div>
+</div>

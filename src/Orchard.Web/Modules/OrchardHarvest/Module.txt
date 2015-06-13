@@ -1,0 +1,16 @@
+﻿Name: Orchard Harvest
+AntiForgery: disabled
+Author: The Orchard Team
+Website: http://orchardharvest.org
+Version: 1.0
+OrchardVersion: 1.8
+Description: Provides Orchard Harvest recipes, widgets and types.
+Features:
+    OrchardHarvest:
+        Description: Provides Orchard Harvest recipes, widgets and types.
+        Category: Orchard Harvest
+        Dependencies: Orchard.CustomForms, Orchard.MediaLibrary
+    OrchardHarvest.Twitter:
+        Description: Enables Twitter services.
+        Category: Orchard Harvest
+        Dependencies: OrchardHarvest
