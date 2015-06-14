@@ -1,0 +1,41 @@
+﻿<!-- Header-->
+<header class="animated fadeInDown delay1">
+    <div class="container">
+        
+        <div class="row">
+
+            <!-- Logo-->
+            <div class="col-md-3 logo">
+                <a href="~/" title="Return Home">
+                    <img src="~/themes/orchardharvest.theme2015/images/logo.png" alt="Logo" class="logo_img">
+                </a>
+            </div>
+            <!-- End Logo-->
+            <!-- Nav-->
+            <nav class="col-md-9">
+                <!-- Menu-->
+                <ul id="menu" class="sf-menu">
+                    <li><a href="@Url.HomePageUrl("#slide")">HOME <i class="fa @*fa-angle-down*@"></i></a></li>
+                    <li>
+                        <a href="#slide">AGENDA <i class="fa @*fa-angle-down*@"></i></a>
+                        <ul>
+                            <li><a href="@Url.Content("~/agenda/day-1")">DAY 1</a></li>
+                            <li><a href="@Url.Content("~/agenda/day-2")">DAY 2</a></li>
+                            <li><a href="@Url.Content("~/agenda/day-3")">DAY 3</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="@Url.HomePageUrl("#sessions")">SESSIONS</a></li>
+                    <li><a href="@Url.HomePageUrl("#speakers")">SPEAKERS</a></li>
+                    <li><a href="@Url.HomePageUrl("#location")">LOCATION</a></li>
+                    <li><a href="@Url.Content("~/register")">REGISTER TODAY</a></li>
+                    <li><a href="@Url.Content("~/sponsors")">SPONSORS</a></li>
+                    <li><a href="@Url.HomePageUrl("#contact")">CONTACT</a></li>
+                </ul>
+                <!-- End Menu-->
+            </nav>
+            <!-- End Nav-->
+
+        </div><!-- End Row-->
+    </div><!-- End Container-->
+</header>
+<!-- End Header-->

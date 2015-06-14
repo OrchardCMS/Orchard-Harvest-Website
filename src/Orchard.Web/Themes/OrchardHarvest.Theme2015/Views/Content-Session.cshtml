@@ -1,0 +1,129 @@
+﻿@using Orchard.ContentManagement
+@using Orchard.Core.Common.Fields
+@using Orchard.Core.Common.Models
+@using Orchard.Core.Title.Models
+@using Orchard.Fields.Fields
+@using Orchard.MediaLibrary.Fields
+@using Orchard.Utility.Extensions
+@using OrchardHarvest.Helpers
+@using OrchardHarvest.Models
+@{
+    var contentItem = (ContentItem)Model.ContentItem;
+    var titlePart = contentItem.As<TitlePart>();
+    var title = titlePart.Title;
+    var sessionPart = contentItem.As<SessionPart>();
+    var speakers = sessionPart.Speakers;
+    var start = sessionPart.Field<DateTimeField>("Start").DateTime;
+    var end = sessionPart.Field<DateTimeField>("End").DateTime;
+
+    Layout.Title = title;
+}
+<!-- Works -->
+<section class="paddings">
+    <div class="container">
+        <div class="row">
+            <!-- Blog Post -->
+            <div class="col-md-12">
+
+                <!-- Item Post -->
+                <article class="post">
+
+                    @*<!-- Post Meta -->
+                        <div class="post-meta">
+                            <span><i class="fa fa-calendar"></i> Nov 10, 2012 </span>
+                            <span><i class="fa fa-user"></i> By <a href="#">Admin</a> </span>
+                            <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a></span>
+                            <span><i class="fa fa-comments"></i> <a href="#">(12)</a></span>
+                        </div>
+                        <!-- End Post Meta -->*@
+                    <!-- Info post -->
+                    <div class="info-post">
+                        <h2><a href="@Request.Path">@title</a></h2>
+                        <h4>@String.Format("{0} to {1}", start.ToString("dddd - MMMM d - hh.mm"), end.ToString("hh:mm"))</h4>
+                        @Display(Model.Content)
+                    </div>
+                    <!--End Info post -->
+
+                </article>
+                <!-- End Item Post -->
+                @{ var i = 0;}
+                @foreach (var speaker in speakers) {
+                    var speakerName = Html.ItemDisplayText(speaker);
+                    var speakerUrl = Url.ItemDisplayUrl(speaker);
+                    var bodyPart = speaker.As<BodyPart>();
+                    var photoField = speaker.Field<MediaLibraryPickerField>("Photo");
+                    var facebookUrl = speaker.Field<TextField>("Facebook").Value;
+                    var twitterUrl = speaker.Field<TextField>("Twitter").Value;
+                    var websiteUrl = speaker.Field<TextField>("Website").Value;
+                    var googleUrl = speaker.Field<TextField>("Google").Value;
+                    var linkedInUrl = speaker.Field<TextField>("LinkedIn").Value;
+                    var subtitle = ((TextField)speaker.Fields.Single(x => x.Name == "Subtitle")).Value;
+                    var mediaPart = photoField.MediaParts.FirstOrDefault();
+                    var photoUrl = mediaPart != null ? mediaPart.MediaUrl : default(string);
+                <!-- Content Autor -->
+                    <div class="row autor">
+                        @if (i++ == 0) {
+                            <h3><i class="fa fa-user"></i> Speakers</h3>
+                        }
+                        <!-- Image Team  -->
+                        <div class="col-md-3">
+                            <div class="image-autor">
+                                @if (!String.IsNullOrWhiteSpace(photoUrl)) {
+                                    <a href="@speakerUrl">
+                                        <img src="@photoUrl" alt="@speakerName" title="@speakerName" />
+                                    </a>
+                                }
+                            </div>
+                            <h4 class="title-subtitle text-center">
+                                @speakerName
+                                @if (!String.IsNullOrWhiteSpace(subtitle)) {
+                                    <span>@subtitle</span>
+                                }
+                            </h4>
+                        </div>
+                        <!-- End Image Team  -->
+                        <!-- Info  Team  -->
+                        <div class="col-md-9">
+                            <p>@bodyPart.Text.RemoveTags()</p>
+                            <!-- Social-->
+                            <ul class="social">
+                                @if (!String.IsNullOrWhiteSpace(linkedInUrl)) {
+                                    <li data-toggle="tooltip" title data-original-title="LinkedIn">
+                                        <a href="@linkedInUrl" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                    </li>
+                                }
+                                @if (!String.IsNullOrWhiteSpace(facebookUrl)) {
+                                    <li data-toggle="tooltip" title data-original-title="Facebook">
+                                        <a href="@facebookUrl" target="_blank"><i class="fa fa-facebook"></i></a>
+                                    </li>
+                                }
+                                @if (!String.IsNullOrWhiteSpace(twitterUrl)) {
+                                    <li data-toggle="tooltip" title data-original-title="Twitter">
+                                        <a href="@twitterUrl" target="_blank"><i class="fa fa-twitter"></i></a>
+                                    </li>
+                                }
+                                @if (!String.IsNullOrWhiteSpace(googleUrl)) {
+                                    <li data-toggle="tooltip" title data-original-title="Google+">
+                                        <a href="@googleUrl" target="_blank"><i class="fa fa-google-plus"></i></a>
+                                    </li>
+                                }
+                                @if (!String.IsNullOrWhiteSpace(websiteUrl)) {
+                                    <li data-toggle="tooltip" title data-original-title="Website">
+                                        <a href="@websiteUrl" target="_blank"><i class="fa fa-cloud"></i></a>
+                                    </li>
+                                }
+                            </ul>
+                            <!-- End Social-->
+
+                        </div>
+                        <!-- End Info  Team  -->
+                    </div>
+                <!--End Content Autor -->
+                }
+            </div>
+            <!-- End Blog Post -->
+        </div>
+    </div>
+    <!-- End Container-->
+</section>
+<!-- End Works-->

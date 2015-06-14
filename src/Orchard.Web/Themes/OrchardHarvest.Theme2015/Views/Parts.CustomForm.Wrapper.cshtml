@@ -1,0 +1,18 @@
+﻿@{
+    dynamic editor = Model.Editor;
+    
+    if (TempData.ContainsKey("CustomFormWidget.InvalidCustomFormState")) {
+        editor = TempData["CustomFormWidget.InvalidCustomFormState"];
+    }
+}
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Create", "Item", new { area = "Orchard.CustomForms", id = Model.ContentItem.Id }))) {
+    @Html.ValidationSummary()
+    @Display(editor)
+    @Html.Hidden("returnUrl", Request.RawUrl);
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" name="submit.Save" value="Submit" class="btn btn-lg btn-primary">
+        </div>
+    </div>
+}
