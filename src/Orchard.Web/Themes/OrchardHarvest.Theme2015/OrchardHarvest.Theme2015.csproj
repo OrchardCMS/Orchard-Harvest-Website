@@ -592,8 +592,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\nav\desktop.ini" />
-    <Content Include="Scripts\totop\desktop.ini" />
     <Content Include="Scripts\twitter\a11d142aaaf9d0c16985f126bba70ed4.json" />
     <Content Include="Scripts\twitter\bdc6cd87fd8fac34113d41c913e1f568.json" />
     <Content Include="Scripts\twitter\f2ded65502bbf97144489dda8335c92e.json" />
@@ -628,15 +626,10 @@
     <Content Include="Html %28reference%29\css\fonts\glyphicons\glyphicons-halflings-regular.eot" />
     <Content Include="Html %28reference%29\css\fonts\glyphicons\glyphicons-halflings-regular.ttf" />
     <Content Include="Html %28reference%29\css\fonts\glyphicons\glyphicons-halflings-regular.woff" />
-    <Content Include="Html %28reference%29\img\Thumbs.db" />
-    <Content Include="Html %28reference%29\img\works\Thumbs.db" />
-    <Content Include="Html %28reference%29\js\nav\desktop.ini" />
-    <Content Include="Html %28reference%29\js\totop\desktop.ini" />
     <Content Include="Html %28reference%29\js\twitter\a11d142aaaf9d0c16985f126bba70ed4.json" />
     <Content Include="Html %28reference%29\js\twitter\bdc6cd87fd8fac34113d41c913e1f568.json" />
     <Content Include="Html %28reference%29\js\twitter\f2ded65502bbf97144489dda8335c92e.json" />
     <Content Include="Images\Web.config" />
-    <Content Include="Images\works\Thumbs.db" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\InfoHeadBar.cshtml" />
