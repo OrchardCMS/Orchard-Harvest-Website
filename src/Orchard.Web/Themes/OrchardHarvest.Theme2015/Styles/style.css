@@ -1414,7 +1414,7 @@ footer{
     color: #f5f5f5;
 }
 .footer-center{
-    padding-bottom: 40px;
+    padding: 30px 0;
 }
 .footer-center .item-center{
     position: relative;	
