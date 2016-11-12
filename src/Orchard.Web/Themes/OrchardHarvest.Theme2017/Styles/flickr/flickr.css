@@ -1,0 +1,18 @@
+.thumbs { margin: 0 auto; padding: 0; overflow: hidden; display: table;}
+.thumbs li {
+	-webkit-transition: 0.5s all ease;
+	-moz-transition: 0.5s all ease;
+	-o-transition: 0.5s all ease;
+	-ms-transition: 0.5s all ease;
+	transition: 0.5s all ease;
+ width: 50px; list-style: none; display: inline-block; margin: 7px; padding: 3px; background: #eee; -moz-box-shadow: 0 0 4px #444; -webkit-box-shadow: 0 0 2px #000; }
+.thumbs li:hover{
+	-webkit-transition: 0.5s all ease;
+	-moz-transition: 0.5s all ease;
+	-o-transition: 0.5s all ease;
+	-ms-transition: 0.5s all ease;
+	transition: 0.5s all ease;
+}
+.thumbs li a { }
+.thumbs li img { display: block; width: 100%; }
+.thumbs li a img { border: none;}

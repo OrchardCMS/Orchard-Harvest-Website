@@ -1,0 +1,74 @@
+﻿@using Orchard.ContentManagement
+@using Orchard.Core.Common.Fields
+@using Orchard.Core.Common.Models
+@using Orchard.MediaLibrary.Fields
+@using Orchard.Utility.Extensions
+@using OrchardHarvest.Models
+@{
+    var speakers = ((IEnumerable<ContentItem>)Model.ContentItems).ToArray();
+}
+<!-- post-testimonials -->
+<section class="paddings post-testimonials" id="speakers">
+    <div class="container">
+        <!-- Title Heading -->
+        <div class="titles-heading">
+            <div class="line"></div>
+            <h1>
+                @T("Speakers")
+                <span>
+                    <i class="fa fa-star"></i>
+                    @T("Orchard Harvest")
+                    <i class="fa fa-star"></i>
+                </span>
+            </h1>
+        </div>
+        <div class="row">
+
+            <!-- Speaker -->
+            <div class="col-md-8">
+                <!-- Box -->
+                <ul class="box">
+                    @foreach (var speaker in speakers) {
+                        var speakerPart = speaker.As<SpeakerPart>();
+                        var speakerName = Html.ItemDisplayText(speaker);
+                        var speakerUrl = Url.ItemDisplayUrl(speaker);
+                        var bodyPart = speaker.As<BodyPart>();
+                        var bioSummary = bodyPart.Text.RemoveTags().Ellipsize(100);
+                        var photoField = (MediaLibraryPickerField)speakerPart.Fields.Single(x => x.Name == "Photo");
+                        var subtitle = ((TextField)speakerPart.Fields.Single(x => x.Name == "Subtitle")).Value;
+                        var mediaPart = photoField.MediaParts.FirstOrDefault();
+                        var photoUrl = mediaPart != null ? mediaPart.MediaUrl : default(string);
+                        <!-- Item speaker -->
+                        <li class="row">
+                            <!-- Date -->
+                            <div class="col-md-3">
+                                <div class="photo">
+                                    <a href="@speakerUrl"><img src="@photoUrl" alt=""></a>
+                                </div>
+                            </div>
+                            <!-- End Date -->
+                            <div class="col-md-9">
+                                <div class="name">
+
+                                    <h4>
+                                        <a href="@speakerUrl">@speakerName</a>
+                                        @if (!String.IsNullOrWhiteSpace(subtitle)) {
+                                            <span>@subtitle</span>
+                                        }
+                                    </h4>
+
+                                </div>
+                                <p>@Html.Raw(bioSummary)</p>
+                            </div>
+                        </li>
+                        <!-- End Item speaker -->
+                    }
+                </ul>
+                <!-- End Box -->
+            </div>
+            <!-- End Speaker -->
+
+        </div>
+    </div>
+</section>
+<!-- End post-testimonials -->

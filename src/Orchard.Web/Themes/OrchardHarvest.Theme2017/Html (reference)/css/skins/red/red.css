@@ -1,0 +1,154 @@
+
+/* Backgrounds ----------------------------------------------------------*/
+
+.camera_prevThumbs, .camera_nextThumbs, .camera_prev, .camera_next, .camera_commands, .camera_thumbs_cont,
+.style_one .btn-primary,
+.style_two .btn-primary,
+.style_two h1 span .border,
+.camera_wrap .camera_pag .camera_pag_ul li.cameracurrent > span,
+.sf-menu li li a:hover,
+.box-action .button,
+.item-service:hover .head-service i,
+.item-service-carousel .color,
+.item-service-carousel .color-small,
+.btn-primary,
+.btn-primary:hover,
+#sponsors  .owl-prev,
+#sponsors .owl-next,
+.tooltip-inner,
+.important-info,
+.box .date span,
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span,
+footer .btn-primary:hover,
+.thumbs li:hover,
+#theme-options .title,
+#theme-options .title span,
+#theme-options .layout-style li.active,
+.items-slide-services li .icon,
+.title-section .title .line-title,
+.title-section .subtitle-section,
+.color > span,
+.pagination > .active > a,
+.carousel-indicators .active,
+.info-comment a,
+.jRibbon,
+.downarrow,
+.line,
+.header-v3{
+	background: #E1483F; 
+	background-color: #E1483F; 
+}
+.overlay{
+	background: #E1483F url("../../../img/more.png") no-repeat center center;;
+	background: rgba(225, 72, 63,0.6) url("../../../img/more.png") no-repeat center center;
+}
+.pattern-important-info{
+	background: #E1483F url("../../../img/patterns/patttern-corporate.png");
+}
+
+.accordion-trigger.active,
+.accordion-trigger:hover{	
+	color: #fff;
+	background: #E1483F url("../../../img/toggle.png") no-repeat right -69px;
+}
+.arrow-comment{
+	background: url("arrow-comment.png");
+}
+.table-discount{
+	background: url('discount.png') no-repeat top center;
+}
+.subtitle-section .left{
+	background: url("arrow-subtitle-left.png") no-repeat center;
+}
+.subtitle-section .right{
+	background: url("arrow-subtitle-right.png") no-repeat center;
+}
+
+/* Colors ----------------------------------------------------------*/
+
+.title-subtitle span,
+.clients .title-downloads:first-letter,
+.subtitle-downloads h4 i,
+.sponsors h2 span,
+.box .link i,
+.box .name span,
+.twitter a,
+footer .links li i,
+.logo-footer h2 span,
+.box .image-more-service i,
+.portfolioFilter .current,
+.portfolioFilter a:hover,
+.list li i,
+.page-error h1 i,
+.sitemap li a,
+.sitemap li a:hover,
+.post h3 a,
+.post h2 a,
+.post .post-meta span a,
+.tags i,
+.comment-post h3 a,
+.autor h3 i,
+.comment-post h3 i,
+.tabs a,
+address i,
+.table-price,
+.head-service h5,
+.titles-heading h1 i,
+.boxes-info h5,
+.custom_input_file i{
+	color: #E1483F;
+}
+
+/* Borders ----------------------------------------------------------*/
+
+.style_one h1 span span,
+.style_two h1 span span{
+	border-bottom: 6px solid #E1483F;
+}
+header{
+	border-bottom: 4px solid #E1483F;
+}
+.tooltip.top .tooltip-arrow {
+  border-top-color: #E1483F;
+}
+.image-clients-downloads li:hover,
+.items-slide-services li:hover{
+	border: solid 3px #E1483F;
+}
+.item-work .info-work .icons-work{
+	border-top: 3px solid #E1483F;
+}
+.title-section .title{
+	border-bottom: 1px solid #E1483F;
+}
+.portfolioFilter .current,
+.portfolioFilter a:hover{
+	border-bottom: 3px solid #E1483F;
+}
+.sf-menu ul{
+	border-bottom: 3px solid #E1483F;
+}
+.comment-post  .info-comment{	
+	border-left: solid 3px #E1483F;
+}
+.head-service i,
+.feature-element li .cirle-feature{
+	border: solid 3px #E1483F;
+}
+.boxes-info h5{
+	border-top: solid 3px #E1483F;
+	border-bottom: solid 3px #E1483F;
+}
+
+@media handheld, only screen and (max-width: 980px) {
+	
+	.comment-post  .info-comment{	
+		border-top: solid 3px #E1483F;
+		border-left: 0;
+	}
+	.arrow-comment{
+		background: url("arrow-comment-top.png") top center no-repeat;
+	}
+	
+}

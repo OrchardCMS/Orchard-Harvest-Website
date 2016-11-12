@@ -1,0 +1,90 @@
+﻿<!-- Speaker Submission -->
+<section class="paddings" id="location">
+    <div class="container">
+        <!-- Title Heading -->
+        <div class="titles-heading">
+            <div class="line"></div>
+            <h1>
+                @T("Location")
+                <span>
+                    <i class="fa fa-star"></i>
+                    @T("Orchard Harvest")
+                    <i class="fa fa-star"></i>
+                </span>
+            </h1>
+        </div>
+        <div class="row">
+            <!-- Sidebars -->
+            <div class="col-md-4 sidebars">
+
+                <aside>
+                    <h4>Event Location</h4>
+                    <address>
+                        <strong>TKP New York Conference Center</strong><br>
+                        <i class="fa fa-map-marker"></i><strong>Address: </strong>109 West 39th Street<br>
+                        <i class="fa fa-plane"></i><strong>City: </strong>New York, NY 10018<br>
+                        <!--<i class="fa fa-phone"></i> <abbr title="Phone">P:</abbr> 0 808 234 19 53-->
+                    </address>
+
+                    <address>
+                        <strong>Email</strong><br>
+                        <i class="fa fa-envelope"></i><strong>Email:</strong><a href="mailto:info@orchardharvest.org">info@orchardharvest.org</a>
+                    </address>
+
+                    <address>
+                        <strong>Accomodation</strong><br />
+                        <i class="fa fa-map-marker"></i>View the page dedicated to the <a href="/accommodations">accommodation information</a>.<br>
+                    </address>
+                </aside>
+
+                <hr class="tall">
+
+            </div>
+            <!-- End Sidebars -->
+            <!-- Content Right -->
+            <!-- Speaker Submission -->
+            <div class="col-md-8">
+                <h3 id="speaker-submission">Speaker Submission</h3>
+                <p class="lead">
+                    We've always had a tremendous response from the Orchard community to calls for open speaker submissions.  It's reflective of your desire to share with others your amazing project experiences as well as technical understanding of what Orchard is capable of empowering.<br />
+                    <br />
+                    Please provide us with as much information regarding the topic, audience, and proposed length of session. We look forward to your submissions and creative proposals. Thank you for making the time to do so!
+                </p>
+
+                <hr class="tall">
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <!-- Tab nav -->
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#contactUs" data-toggle="tab">
+                                <i class="fa fa-envelope"></i> Submit Speaker
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- End Tab nav -->
+                    <!-- Tab Content -->
+                    <div class="tab-content">
+                        <!-- Tab item -->
+                        <div class="tab-pane active" id="contactUs">
+
+                            <h4>Speaker &amp; Topics Details</h4>
+
+                            @Display(Model.Content)
+                        </div>
+                        <!-- End Tab item -->
+
+                    </div>
+                    <!-- End Tab Content -->
+                </div>
+                <!-- End Tabs -->
+            </div>
+            @*<div class="col-md-8"><iframe src="https://www.google.com/maps/d/embed?mid=z7gY3BT4raxQ.kkU5KzyR0kR8" width="640" height="480"></iframe>
+                </div>*@
+            <!-- End Content Right -->
+        </div>
+    </div>
+    <!-- End Container-->
+</section>
+<!-- End Contact Us-->

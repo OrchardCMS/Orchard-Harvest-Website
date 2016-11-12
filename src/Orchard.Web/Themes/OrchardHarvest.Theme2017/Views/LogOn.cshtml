@@ -1,0 +1,50 @@
+﻿@using Orchard.ContentManagement
+@{
+    var userCanRegister = WorkContext.CurrentSite.As<Orchard.Users.Models.RegistrationSettingsPart>().UsersCanRegister;
+    var enableLostPassword = WorkContext.CurrentSite.As<Orchard.Users.Models.RegistrationSettingsPart>().EnableLostPassword;
+}
+
+<section class="paddings">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="page-title">@Html.TitleForPage((string)Model.Title)</h3>
+                <p class="lead">
+                    @T("Please enter your username and password.")
+                    @if (userCanRegister) { @Html.ActionLink(T("Register").Text, "Register", new { ReturnUrl = Request.QueryString["ReturnUrl"] }) @T(" if you don't have an account.") }
+                    @if (enableLostPassword) { @Html.ActionLink(T("Lost your Password?").Text, "RequestLostPassword") }
+                </p>
+                <hr class="tall">
+                @Html.ValidationSummary(T("Login was unsuccessful. Please correct the errors and try again.").ToString())
+                @using (Html.BeginFormAntiForgeryPost(Url.Action("LogOn", new { ReturnUrl = Request.QueryString["ReturnUrl"] }))) {
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="username-email">@T("Username")</label>
+                                @Html.TextBox("userNameOrEmail", "", new { id = "username-email", autofocus = "autofocus", @class = "form-control" })
+                                @Html.ValidationMessage("userNameOrEmail")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="password">@T("Password")</label>
+                                @Html.Password("password", "", new { @class = "form-control" })
+                                @Html.ValidationMessage("password")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.CheckBox("rememberMe", new { id = "remember-me" })
+                                <label class="forcheckbox" for="remember-me">@T("Remember Me")</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-lg btn-primary" type="submit">@T("Sign In")</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
